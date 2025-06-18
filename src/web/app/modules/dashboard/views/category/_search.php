@@ -4,34 +4,29 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\ShopSearch $model */
+/** @var app\models\CategorySearch $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="shop-search">
+<div class="category-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
+        'options' => [
+            'data-pjax' => 1
+        ],
     ]); ?>
 
     <?= $form->field($model, 'id') ?>
 
     <?= $form->field($model, 'name') ?>
 
-    <?= $form->field($model, 'description') ?>
-
     <?= $form->field($model, 'slug') ?>
 
-    <?= $form->field($model, 'logo_id') ?>
+    <?= $form->field($model, 'type') ?>
 
-    <?php // echo $form->field($model, 'owner_id') ?>
-
-    <?php // echo $form->field($model, 'status') ?>
-
-    <?php // echo $form->field($model, 'is_approved')->checkbox() ?>
-
-    <?php // echo $form->field($model, 'is_published')->checkbox() ?>
+    <?= $form->field($model, 'description') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>
 

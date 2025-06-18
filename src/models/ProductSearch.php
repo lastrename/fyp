@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Shop;
+use app\models\Product;
 
 /**
- * ShopSearch represents the model behind the search form of `app\models\Shop`.
+ * ProductSearch represents the model behind the search form of `app\models\Product`.
  */
-class ShopSearch extends Shop
+class ProductSearch extends Product
 {
     /**
      * {@inheritdoc}
@@ -17,9 +17,9 @@ class ShopSearch extends Shop
     public function rules()
     {
         return [
-            [['id', 'owner_id'], 'integer'],
-            [['name', 'description', 'slug', 'logo_id', 'status', 'created_at', 'updated_at'], 'safe'],
-            [['is_approved', 'is_published'], 'boolean'],
+            [['id', 'stock', 'category_id', 'shop_id', 'user_id'], 'integer'],
+            [['name', 'description', 'status', 'created_at', 'updated_at'], 'safe'],
+            [['price'], 'number'],
         ];
     }
 
@@ -42,7 +42,7 @@ class ShopSearch extends Shop
      */
     public function search($params, $formName = null)
     {
-        $query = Shop::find();
+        $query = Product::find();
 
         // add conditions that should always apply here
 
@@ -61,17 +61,17 @@ class ShopSearch extends Shop
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'owner_id' => $this->owner_id,
-            'is_approved' => $this->is_approved,
-            'is_published' => $this->is_published,
+            'price' => $this->price,
+            'stock' => $this->stock,
+            'category_id' => $this->category_id,
+            'shop_id' => $this->shop_id,
+            'user_id' => $this->user_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['ilike', 'name', $this->name])
             ->andFilterWhere(['ilike', 'description', $this->description])
-            ->andFilterWhere(['ilike', 'slug', $this->slug])
-            ->andFilterWhere(['ilike', 'logo_id', $this->logo_id])
             ->andFilterWhere(['ilike', 'status', $this->status]);
 
         return $dataProvider;

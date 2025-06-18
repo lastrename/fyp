@@ -30,6 +30,9 @@ class Shop extends ActiveRecord
     const STATUS_PUBLISHED = 'PUBLISHED';
     const STATUS_ARCHIVED = 'ARCHIVED';
 
+    /**
+     * {@inheritdoc}
+     */
     public function behaviors(): array
     {
         return [
@@ -39,11 +42,17 @@ class Shop extends ActiveRecord
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function tableName(): string
     {
         return 'shop';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function rules(): array
     {
         return [
@@ -57,6 +66,9 @@ class Shop extends ActiveRecord
         ];
     }
 
+    /**
+     * @return ActiveQuery
+     */
     public function getOwner(): ActiveQuery
     {
         return $this->hasOne(User::class, ['id' => 'owner_id']);

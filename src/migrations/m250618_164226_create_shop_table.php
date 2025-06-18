@@ -23,7 +23,7 @@ class m250618_164226_create_shop_table extends Migration
             'is_approved' => $this->boolean()->notNull()->defaultValue(false),
             'is_published' => $this->boolean()->notNull()->defaultValue(false),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
-            'updated_at' => $this->timestamp()->notNull(),
+            'updated_at' => $this->timestamp()->null(),
         ]);
 
         $this->addForeignKey(
