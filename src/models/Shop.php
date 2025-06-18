@@ -56,11 +56,11 @@ class Shop extends ActiveRecord
     public function rules(): array
     {
         return [
-            [['id', 'name', 'slug', 'owner_id', 'status'], 'required'],
+            [['name', 'slug', 'owner_id', 'status'], 'required'],
             [['description'], 'string'],
             [['is_approved', 'is_published'], 'boolean'],
             [['created_at', 'updated_at'], 'safe'],
-            [['id', 'logo_id', 'owner_id'], 'string', 'max' => 255],
+            [['logo_id', 'owner_id'], 'string', 'max' => 255],
             [['name', 'slug', 'status'], 'string', 'max' => 255],
             [['slug'], 'unique'],
         ];
@@ -73,9 +73,9 @@ class Shop extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Название магазина',
+            'name' => 'Название',
             'description' => 'Описание',
-            'slug' => 'Слаг',
+            'slug' => 'Slug',
             'logo_id' => 'ID логотипа',
             'owner_id' => 'Владелец',
             'status' => 'Статус',

@@ -18,8 +18,8 @@ class m250618_165637_create_category_table extends Migration
             'slug' => $this->string()->notNull()->unique(),
             'type' => $this->string()->notNull()->defaultValue('PRODUCT'),
             'description' => $this->text(),
-            'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
-            'updated_at' => $this->timestamp()->null(),
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
         ]);
     }
 

@@ -4,6 +4,7 @@ namespace app\modules\dashboard\controllers;
 
 use app\models\Shop;
 use app\models\ShopSearch;
+use Yii;
 use yii\db\Exception;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -59,6 +60,8 @@ class ShopController extends BaseController
         } else {
             $model->loadDefaultValues();
         }
+
+        $model->owner_id = Yii::$app->user->id;
 
         return $this->render('create', [
             'model' => $model,

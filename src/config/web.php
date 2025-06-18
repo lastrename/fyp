@@ -48,6 +48,13 @@ $config = [
             'rules' => [
             ],
         ],
+        'formatter' => [
+            'class' => 'yii\i18n\Formatter',
+            'locale' => 'ru-RU',
+            'dateFormat' => 'php:d.m.Y',
+            'datetimeFormat' => 'php:d.m.Y H:i',
+            'timeFormat' => 'php:H:i',
+        ],
     ],
     'modules' => [
         'dashboard' => [

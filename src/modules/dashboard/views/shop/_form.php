@@ -1,5 +1,7 @@
 <?php
 
+use app\models\User;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -12,30 +14,30 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id')->textInput() ?>
-
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'logo_id')->textInput(['maxlength' => true]) ?>
+    <?php //$form->field($model, 'logo_id')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'owner_id')->textInput() ?>
+    <?= $form->field($model, 'owner_id')->dropDownList(
+        ArrayHelper::map(User::find()->all(), 'id', 'username'),
+        ['prompt' => 'Выберите владельца']
+    ) ?>
 
-    <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'status')->dropDownList(
+        $model::getStatusList(),
+        ['prompt' => 'Выберите статус']
+    ) ?>
 
     <?= $form->field($model, 'is_approved')->checkbox() ?>
 
     <?= $form->field($model, 'is_published')->checkbox() ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    <div class="form-group mt-4">
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

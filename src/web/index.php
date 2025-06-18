@@ -1,4 +1,5 @@
 <?php
+setlocale(LC_ALL, 'ru_RU.UTF-8');
 
 // comment out the following two lines when deployed to production
 defined('YII_DEBUG') or define('YII_DEBUG', true);

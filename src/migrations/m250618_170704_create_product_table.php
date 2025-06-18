@@ -22,8 +22,8 @@ class m250618_170704_create_product_table extends Migration
             'category_id' => $this->integer()->notNull(),
             'shop_id' => $this->integer()->notNull(),
             'user_id' => $this->integer()->notNull(),
-            'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
-            'updated_at' => $this->timestamp()->null(),
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
         ]);
 
         // Внешние ключи

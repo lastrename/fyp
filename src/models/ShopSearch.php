@@ -4,6 +4,7 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 
 /**
  * ShopSearch represents the model behind the search form of `app\models\Shop`.
@@ -68,5 +69,13 @@ class ShopSearch extends Shop
             ->andFilterWhere(['ilike', 'status', $this->status]);
 
         return $dataProvider;
+    }
+
+    /**
+     * @return array
+     */
+    public function getUserList(): array
+    {
+        return ArrayHelper::map(User::find()->all(), 'id', 'username');
     }
 }

@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var app\models\ShopSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Shops';
+$this->title = 'Питомники';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="shop-index">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Shop', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить питомник', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,15 +29,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'name',
             'description:ntext',
-            'slug',
-            'logo_id',
-            //'owner_id',
-            //'status',
-            //'is_approved:boolean',
-            //'is_published:boolean',
+            //'slug',
+            //'logo_id',
+            [
+                'attribute' => 'owner_id',
+                'value' => fn($model) => $model->owner->username ?? '(неизвестно)',
+                'filter' => $searchModel->getUserList(),
+            ],
+            [
+                'attribute' => 'status',
+                'value' => fn($model) => $model::getStatusList()[$model->status] ?? $model->status,
+                'filter' => $searchModel::getStatusList(),
+            ],
+            'is_approved:boolean',
+            'is_published:boolean',
             //'created_at',
             //'updated_at',
             [
