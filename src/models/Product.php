@@ -80,16 +80,16 @@ class Product extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'price' => 'Price',
-            'stock' => 'Stock',
-            'status' => 'Status',
+            'name' => 'Название',
+            'description' => 'Описание',
+            'price' => 'Цена',
+            'stock' => 'Наличие',
+            'status' => 'Статус',
             'category_id' => 'Category ID',
             'shop_id' => 'Shop ID',
             'user_id' => 'User ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 

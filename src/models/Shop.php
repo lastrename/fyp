@@ -67,6 +67,26 @@ class Shop extends ActiveRecord
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels(): array
+    {
+        return [
+            'id' => 'ID',
+            'name' => 'Название магазина',
+            'description' => 'Описание',
+            'slug' => 'Слаг',
+            'logo_id' => 'ID логотипа',
+            'owner_id' => 'Владелец',
+            'status' => 'Статус',
+            'is_approved' => 'Одобрен',
+            'is_published' => 'Опубликован',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
+        ];
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getOwner(): ActiveQuery

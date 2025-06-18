@@ -4,6 +4,7 @@ namespace app\modules\dashboard\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 
 class BaseController extends Controller
@@ -25,7 +26,13 @@ class BaseController extends Controller
                         }
                     ],
                 ],
-            ]
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
         ];
     }
 }
