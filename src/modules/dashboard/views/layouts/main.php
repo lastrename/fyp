@@ -15,6 +15,7 @@ $this->registerJsFile('@web/js/main.js', ['depends' => [\yii\web\JqueryAsset::cl
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="<?= Yii::$app->request->csrfToken ?>">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?> - Админка PlantMarket</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -41,13 +42,13 @@ $this->registerJsFile('@web/js/main.js', ['depends' => [\yii\web\JqueryAsset::cl
             ['label' => 'Категории', 'icon' => 'tags', 'route' => 'category/index'],
             ['label' => 'Товары', 'icon' => 'box-seam', 'route' => 'product/index'],
             //['label' => 'Статьи', 'icon' => 'file-earmark-text', 'route' => 'articles/index'],
-            ['label' => 'Тэги', 'icon' => 'bookmark', 'route' => 'tags/index'],
-            ['label' => 'Заказы', 'icon' => 'cart', 'route' => 'orders/index'],
+            ['label' => 'Тэги', 'icon' => 'bookmark', 'route' => 'tag/index'],
+            ['label' => 'Заказы', 'icon' => 'cart', 'route' => 'order/index'],
             //['label' => 'Отзывы', 'icon' => 'chat-dots', 'route' => 'reviews/index'],
             //['label' => 'Платежи', 'icon' => 'credit-card', 'route' => 'payments/index'],
             //['label' => 'Скидки/Акции', 'icon' => 'percent', 'route' => 'discounts/index'],
-            ['label' => 'Чаты', 'icon' => 'chat-left-text', 'route' => 'chats/index'],
-            ['label' => 'Пользователи', 'icon' => 'people', 'route' => 'users/index'],
+            ['label' => 'Чаты', 'icon' => 'chat-left-text', 'route' => 'chat/index'],
+            ['label' => 'Пользователи', 'icon' => 'people', 'route' => 'user/index'],
             ['label' => 'Настройки', 'icon' => 'gear', 'route' => 'settings/index'],
         ];
 

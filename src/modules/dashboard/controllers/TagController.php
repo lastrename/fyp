@@ -2,25 +2,25 @@
 
 namespace app\modules\dashboard\controllers;
 
-use app\models\Product;
-use app\models\ProductSearch;
+use app\models\Tag;
+use app\models\TagSearch;
 use yii\db\Exception;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 /**
- * ProductController implements the CRUD actions for Product model.
+ * TagController implements the CRUD actions for Tag model.
  */
-class ProductController extends BaseController
+class TagController extends BaseController
 {
     /**
-     * Lists all Product models.
+     * Lists all Tag models.
      *
      * @return string
      */
     public function actionIndex(): string
     {
-        $searchModel = new ProductSearch();
+        $searchModel = new TagSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -30,7 +30,7 @@ class ProductController extends BaseController
     }
 
     /**
-     * Displays a single Product model.
+     * Displays a single Tag model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -43,14 +43,14 @@ class ProductController extends BaseController
     }
 
     /**
-     * Creates a new Product model.
+     * Creates a new Tag model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|Response
      * @throws Exception
      */
     public function actionCreate(): Response|string
     {
-        $model = new Product();
+        $model = new Tag();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -66,7 +66,7 @@ class ProductController extends BaseController
     }
 
     /**
-     * Updates an existing Product model.
+     * Updates an existing Tag model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|Response
@@ -86,7 +86,7 @@ class ProductController extends BaseController
     }
 
     /**
-     * Deletes an existing Product model.
+     * Deletes an existing Tag model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return Response
@@ -100,15 +100,15 @@ class ProductController extends BaseController
     }
 
     /**
-     * Finds the Product model based on its primary key value.
+     * Finds the Tag model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Product the loaded model
+     * @return Tag the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel(int $id): Product
+    protected function findModel(int $id): Tag
     {
-        if (($model = Product::findOne(['id' => $id])) !== null) {
+        if (($model = Tag::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

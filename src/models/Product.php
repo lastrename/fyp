@@ -114,6 +114,14 @@ class Product extends ActiveRecord
     }
 
     /**
+     * @return ActiveQuery
+     */
+    public function getTags(): ActiveQuery
+    {
+        return $this->hasMany(ProductTag::class, ['product_id' => 'id']);
+    }
+
+    /**
      * Gets query for [[User]].
      *
      * @return ActiveQuery

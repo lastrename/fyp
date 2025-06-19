@@ -5,14 +5,14 @@ use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var app\models\Category $model */
+/** @var app\models\User $model */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => ['index']];
+$this->title = $model->username;
+$this->params['breadcrumbs'][] = ['label' => 'Пользователь', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 YiiAsset::register($this);
 ?>
-<div class="category-view">
+<div class="user-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,13 +30,19 @@ YiiAsset::register($this);
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'name',
-            'slug',
-            'type',
-            'description:ntext',
+            //'id',
+            'username',
+            'email:email',
+            'email_verified:boolean',
+            'full_name',
+            [
+                'attribute' => 'role',
+                'value' => function ($model) {
+                    return $model::getRoleList()[$model->role];
+                }
+            ],
             'created_at:datetime',
-            'updated_at:datetime',
+            'update_at:datetime',
         ],
     ]) ?>
 

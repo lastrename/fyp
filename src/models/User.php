@@ -234,4 +234,14 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return ArrayHelper::map(self::find()->all(), 'id', 'username');
     }
+
+    public static function getRoleList(): array
+    {
+        return [
+            self::ROLE_USER => 'Пользователь',
+            self::ROLE_SELLER => 'Продавец',
+            self::ROLE_MANAGER => 'Менеджер',
+            self::ROLE_ADMIN => 'Администратор',
+        ];
+    }
 }

@@ -6,9 +6,9 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * ProductSearch represents the model behind the search form of `app\models\Product`.
+ * TagSearch represents the model behind the search form of `app\models\Tag`.
  */
-class ProductSearch extends Product
+class TagSearch extends Tag
 {
     /**
      * {@inheritdoc}
@@ -16,9 +16,8 @@ class ProductSearch extends Product
     public function rules(): array
     {
         return [
-            [['id', 'stock', 'category_id', 'shop_id', 'user_id'], 'integer'],
-            [['name', 'description', 'status', 'created_at', 'updated_at'], 'safe'],
-            [['price'], 'number'],
+            [['id', 'created_at', 'updated_at'], 'integer'],
+            [['name', 'slug'], 'safe'],
         ];
     }
 
@@ -40,7 +39,7 @@ class ProductSearch extends Product
      */
     public function search(array $params, string $formName = null): ActiveDataProvider
     {
-        $query = Product::find();
+        $query = Tag::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -52,20 +51,15 @@ class ProductSearch extends Product
             return $dataProvider;
         }
 
+        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'price' => $this->price,
-            'stock' => $this->stock,
-            'category_id' => $this->category_id,
-            'shop_id' => $this->shop_id,
-            'user_id' => $this->user_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['ilike', 'name', $this->name])
-            ->andFilterWhere(['ilike', 'description', $this->description])
-            ->andFilterWhere(['ilike', 'status', $this->status]);
+            ->andFilterWhere(['ilike', 'slug', $this->slug]);
 
         return $dataProvider;
     }

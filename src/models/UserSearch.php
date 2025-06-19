@@ -6,9 +6,9 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * ProductSearch represents the model behind the search form of `app\models\Product`.
+ * UserSearch represents the model behind the search form of `app\models\User`.
  */
-class ProductSearch extends Product
+class UserSearch extends User
 {
     /**
      * {@inheritdoc}
@@ -16,9 +16,9 @@ class ProductSearch extends Product
     public function rules(): array
     {
         return [
-            [['id', 'stock', 'category_id', 'shop_id', 'user_id'], 'integer'],
-            [['name', 'description', 'status', 'created_at', 'updated_at'], 'safe'],
-            [['price'], 'number'],
+            [['id', 'created_at', 'update_at'], 'integer'],
+            [['username', 'email', 'full_name', 'password_hash', 'auth_key', 'role', 'access_token'], 'safe'],
+            [['email_verified'], 'boolean'],
         ];
     }
 
@@ -40,7 +40,7 @@ class ProductSearch extends Product
      */
     public function search(array $params, string $formName = null): ActiveDataProvider
     {
-        $query = Product::find();
+        $query = User::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -54,18 +54,18 @@ class ProductSearch extends Product
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'price' => $this->price,
-            'stock' => $this->stock,
-            'category_id' => $this->category_id,
-            'shop_id' => $this->shop_id,
-            'user_id' => $this->user_id,
+            'email_verified' => $this->email_verified,
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'update_at' => $this->update_at,
         ]);
 
-        $query->andFilterWhere(['ilike', 'name', $this->name])
-            ->andFilterWhere(['ilike', 'description', $this->description])
-            ->andFilterWhere(['ilike', 'status', $this->status]);
+        $query->andFilterWhere(['ilike', 'username', $this->username])
+            ->andFilterWhere(['ilike', 'email', $this->email])
+            ->andFilterWhere(['ilike', 'full_name', $this->full_name])
+            ->andFilterWhere(['ilike', 'password_hash', $this->password_hash])
+            ->andFilterWhere(['ilike', 'auth_key', $this->auth_key])
+            ->andFilterWhere(['ilike', 'role', $this->role])
+            ->andFilterWhere(['ilike', 'access_token', $this->access_token]);
 
         return $dataProvider;
     }
