@@ -32,20 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
 
-    // Active navigation highlighting
-    const navLinks = document.querySelectorAll(".sidebar-nav .nav-link")
-    navLinks.forEach((link) => {
-        link.addEventListener("click", function (e) {
-            e.preventDefault()
-
-            // Remove active class from all links
-            navLinks.forEach((l) => l.classList.remove("active"))
-
-            // Add active class to clicked link
-            this.classList.add("active")
-        })
-    })
-
     // Smooth scrolling for internal links
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
