@@ -5,6 +5,7 @@ namespace app\models;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "shop".
@@ -114,5 +115,13 @@ class Shop extends ActiveRecord
     public function getStatusLabel(): string
     {
         return self::getStatusList()[$this->status] ?? $this->status;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getList(): array
+    {
+        return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
 }

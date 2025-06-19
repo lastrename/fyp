@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Category;
+use app\models\Product;
 use app\models\Shop;
 use app\models\User;
 use yii\helpers\Html;
@@ -8,18 +10,18 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var app\models\ShopSearch $searchModel */
+/** @var app\models\ProductSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Питомники';
+$this->title = 'Товары';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="shop-index">
+<div class="product-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Добавить питомник', ['create'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Создать товар', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -33,25 +35,36 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'name',
             //'description:ntext',
-            //'slug',
-            //'logo_id',
-            [
-                'attribute' => 'owner_id',
-                'value' => fn($model) => $model->owner->username ?? '(неизвестно)',
-                'filter' => User::getList(),
-            ],
+            'price',
+            'stock',
             [
                 'attribute' => 'status',
                 'value' => fn($model) => $model::getStatusList()[$model->status] ?? $model->status,
+                'filter' => $searchModel::getStatusList(),
+            ],
+            [
+                'attribute' => 'category_id',
+                'label' => 'Категория',
+                'value' => fn($model) => $model->category->name ?? null,
+                'filter' => Category::getList(),
+            ],
+            [
+                'attribute' => 'shop_id',
+                'label' => 'Питомник',
+                'value' => fn($model) => $model->shop->name ?? null,
+                'filter' => Shop::getList(),
+            ],
+            [
+                'attribute' => 'user_id',
+                'label' => 'Пользователь',
+                'value' => fn($model) => $model->user->username ?? null,
                 'filter' => User::getList(),
             ],
-            'is_approved:boolean',
-            'is_published:boolean',
             //'created_at',
             //'updated_at',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Shop $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Product $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

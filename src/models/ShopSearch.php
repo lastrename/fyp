@@ -70,12 +70,4 @@ class ShopSearch extends Shop
 
         return $dataProvider;
     }
-
-    /**
-     * @return array
-     */
-    public function getUserList(): array
-    {
-        return ArrayHelper::map(User::find()->all(), 'id', 'username');
-    }
 }

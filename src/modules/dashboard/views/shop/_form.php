@@ -37,7 +37,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'is_published')->checkbox() ?>
 
     <div class="form-group mt-4">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -4,6 +4,7 @@ namespace app\models;
 
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "category".
@@ -94,5 +95,13 @@ class Category extends ActiveRecord
     public function getTypeLabel(): string
     {
         return self::getTypeList()[$this->type] ?? $this->type;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getList(): array
+    {
+        return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
 }

@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Exception;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 
 /**
@@ -224,5 +225,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function setPassword(string $password): void
     {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getList(): array
+    {
+        return ArrayHelper::map(self::find()->all(), 'id', 'username');
     }
 }
