@@ -22,6 +22,7 @@ use yii\web\IdentityInterface;
  * @property int|null $email_verified
  * @property int $created_at
  * @property int $update_at
+ * @property bool $is_social
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -90,7 +91,8 @@ class User extends ActiveRecord implements IdentityInterface
             'role' => 'Роль',
             'access_token' => 'Токен доступа',
             'created_at' => 'Дата создания',
-            'update_at' => 'Дата обновления',
+            'updated_at' => 'Дата обновления',
+            'is_social' => 'Авторизован через соц. сети',
         ];
     }
 
@@ -109,7 +111,7 @@ class User extends ActiveRecord implements IdentityInterface
 
             [['role'], 'in', 'range' => self::ROLE_LIST],
 
-            [['password'], 'safe'],
+            [['password', 'is_social'], 'safe'],
 
             [['auth_key', 'access_token'], 'string', 'max' => 255],
         ];

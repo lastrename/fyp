@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -44,6 +45,10 @@ class SiteController extends Controller
     public function actions()
     {
         return [
+            'auth' => [
+                'class' => 'yii\authclient\AuthAction',
+                'successCallback' => [$this, 'onAuthSuccess'],
+            ],
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
@@ -52,6 +57,31 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    public function onAuthSuccess($client)
+    {
+        $attributes = $client->getUserAttributes();
+
+        $email = $attributes['email'] ?? null;
+        $id = $attributes['id'] ?? null;
+
+        $user = User::find()->where(['email' => $email])->one();
+        if (!$user) {
+            $user = new User();
+            $user->email = $email;
+            $user->username = $email;
+            $user->full_name = $attributes['name'] ?? 'user_' . $id;
+
+            // Генерируем случайный пароль для авторизации через соц сети.
+            // Возможно сделать в базе возможность записывать как null
+            // И оставлять пустым поле пароль?
+            $user->password_hash = Yii::$app->security->generatePasswordHash(Yii::$app->security->generateRandomString());
+            $user->is_social = true;
+            $user->save(false);
+        }
+
+        Yii::$app->user->login($user, 3600 * 24 * 30);
     }
 
     /**

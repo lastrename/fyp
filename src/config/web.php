@@ -55,6 +55,18 @@ $config = [
             'datetimeFormat' => 'php:d.m.Y H:i',
             'timeFormat' => 'php:H:i',
         ],
+        'authClientCollection' => [
+            'class' => 'yii\authclient\Collection',
+            'clients' => [
+                'google' => [
+                    'class'        => 'yii\authclient\clients\Google',
+                    'clientId'     => getenv('GOOGLE_CLIENT_ID'),
+                    'clientSecret' => getenv('GOOGLE_CLIENT_SECRET'),
+                    'returnUrl' => 'http://localhost/site/auth?authclient=google',
+
+                ],
+            ],
+        ],
     ],
     'modules' => [
         'dashboard' => [
